@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+  <meta property="fb:admins" content="<user_id>" />
+  <meta property="fb:app_id" content="<app_id>" />
+
+
+
+<meta name="description" content="实验目的： 观察系统存储器使用情况 观察进程使用存储器的情况 掌握通过内存映像文件提高性能的方法 掌握动态内存分配技术
+存储相关的命令free 显示系统使用和未被使用的内存数量（可以实时执行）输出包含的标题有 3 行信息：Mem。此行包含了有关物理内存的信息。包括以下详细内容：total。该项显示可用的物理内存总量，单位为 KB。该数字小于安装的物理内存的容量，是因为内核本身也要使用一小部分的内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-存储管理">
+<meta property="og:url" content="http://yoursite.com/2016/11/15/操作系统-存储管理/index.html">
+<meta property="og:site_name" content="Xperia">
+<meta property="og:description" content="实验目的： 观察系统存储器使用情况 观察进程使用存储器的情况 掌握通过内存映像文件提高性能的方法 掌握动态内存分配技术
+存储相关的命令free 显示系统使用和未被使用的内存数量（可以实时执行）输出包含的标题有 3 行信息：Mem。此行包含了有关物理内存的信息。包括以下详细内容：total。该项显示可用的物理内存总量，单位为 KB。该数字小于安装的物理内存的容量，是因为内核本身也要使用一小部分的内存">
+<meta property="og:image" content="http://yoursite.com/img/图111.png">
+<meta property="og:image" content="http://yoursite.com/img/图222.png">
+<meta property="og:image" content="http://yoursite.com/img/图333.png">
+<meta property="og:image" content="http://yoursite.com/img/图4.png">
+<meta property="og:image" content="http://yoursite.com/img/图5.png">
+<meta property="og:image" content="http://yoursite.com/img/图6.png">
+<meta property="og:image" content="http://yoursite.com/img/图7.png">
+<meta property="og:image" content="http://yoursite.com/img/图8.png">
+<meta property="og:image" content="http://yoursite.com/img/图10.png">
+<meta property="og:image" content="http://yoursite.com/img/图11.png">
+<meta property="og:updated_time" content="2016-11-15T15:20:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统-存储管理">
+<meta name="twitter:description" content="实验目的： 观察系统存储器使用情况 观察进程使用存储器的情况 掌握通过内存映像文件提高性能的方法 掌握动态内存分配技术
+存储相关的命令free 显示系统使用和未被使用的内存数量（可以实时执行）输出包含的标题有 3 行信息：Mem。此行包含了有关物理内存的信息。包括以下详细内容：total。该项显示可用的物理内存总量，单位为 KB。该数字小于安装的物理内存的容量，是因为内核本身也要使用一小部分的内存">
+<meta name="twitter:image" content="http://yoursite.com/img/图111.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 操作系统-存储管理 | Xperia </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<app_id>',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_Hans/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xperia</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                操作系统-存储管理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-15T22:26:39+08:00" content="2016-11-15">
+              2016-11-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+            &nbsp; | &nbsp;
+            <div class="fb-like" data-layout="button_count" data-share="true"></div>
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="实验目的："><a href="#实验目的：" class="headerlink" title="实验目的："></a>实验目的：</h2><p> 观察系统存储器使用情况<br> 观察进程使用存储器的情况<br> 掌握通过内存映像文件提高性能的方法<br> 掌握动态内存分配技术</p>
+<h2 id="存储相关的命令"><a href="#存储相关的命令" class="headerlink" title="存储相关的命令"></a>存储相关的命令</h2><p>free 显示系统使用和未被使用的内存数量（可以实时执行）<br>输出包含的标题有 3 行信息：<br>Mem。此行包含了有关物理内存的信息。包括以下详细内容：<br>total。该项显示可用的物理内存总量，单位为 KB。该数字小于安装的物理内存的容量，是因为内核本身也要使用一小部分的内存。<br>used。该项显示了用于应用程序超速缓存数据的内存容量。<br>free。该项显示了此时未使用且有效的内存容量。<br><a id="more"></a><br>Shared/buffers/cached。这些列显示了有关内存如何使用的更为详细的信息。<br>-/+ buffers/cache。Linux 系统中的部分内存用来为应用程序或设备高速缓存数据。这部分内存在需要用于其他目的时可以释放。<br>free 列显示了调整的缓冲区行，显示释放缓冲区或高速缓存时可以使用的内存容量。<br>Swap。该行显示有关交换内存利用率的信息。该信息包含全部、已使用和释放的可用内存容量。<br>    vmstat 报告进程、内存、分页、IO等多类信息（使用手册页）<br>    size 列出目标文件段大小和总大小（使用手册页）</p>
+<h2 id="proc文件系统（使用手册页man-5-proc）"><a href="#proc文件系统（使用手册页man-5-proc）" class="headerlink" title="/proc文件系统（使用手册页man 5 proc）"></a>/proc文件系统（使用手册页man 5 proc）</h2><p>/proc/meminfo 内存状态信息<br>/proc/stat 包含内存页、内存对换等信息。<br>/proc/pid/stat 某个进程的信息(包含内存使用信息)<br>/proc/pid/maps某个进程的内存映射区信息，包括地址范围、权限、偏移量以及主次设备号和映射文件的索引节点。<br>/proc/pid/statm 某个进程的内存使用信息，包括内存总大小、驻留集大小、共享页面数、文本页面数、堆栈页面数和脏页面数。</p>
+<h2 id="内存映像文件"><a href="#内存映像文件" class="headerlink" title="内存映像文件"></a>内存映像文件</h2><p>内存映像文件是指把一个磁盘文件映像到内存中，二者存在逐字节的对应关系。这样做可以加速I/O操作，并可以共享数据。</p>
+<h3 id="mmap（建立内存映射）"><a href="#mmap（建立内存映射）" class="headerlink" title="mmap（建立内存映射）"></a>mmap（建立内存映射）</h3><p>表头文件<br>  </p>
+<pre><code>#include(unistd.h)
+#include(sys/mman.h)
+</code></pre><p>定义函数  void <em>mmap(void </em>start,size_t length,int prot,int flags,int fd,off_t offsize);<br>函数说明  mmap()用来将某个文件内容映射到内存中，对该内存区域的存取即是直接对该文件内容的读写。参数start指向欲对应的内存起始地址，通常设为NULL，代表让系统自动选定地址，对应成功后该地址会返回。参数length代表将文件中多大的部分对应到内存。<br>参数  prot代表映射区域的保护方式有下列组合<br>PROT_EXEC 映射区域可被执行<br>PROT_READ 映射区域可被读取<br>PROT_WRITE 映射区域可被写入<br>PROT_NONE 映射区域不能存取<br>参数  flags会影响映射区域的各种特性<br>MAP_FIXED 如果参数start所指的地址无法成功建立映射时，则放弃映射，不对地址做修正。通常不鼓励用此旗标。<br>MAP_SHARED对映射区域的写入数据会复制回文件内，而且允许其他映射该文件的进程共享。<br>MAP_PRIVATE 对映射区域的写入操作会产生一个映射文件的复制，即私人的“写入时复制”（copy on write）对此区域作的任何修改都不会写回原来的文件内容。<br>MAP_ANONYMOUS建立匿名映射。此时会忽略参数fd，不涉及文件，而且映射区域无法和其他进程共享。<br>MAP_DENYWRITE只允许对映射区域的写入操作，其他对文件直接写入的操作将会被拒绝。<br>MAP_LOCKED 将映射区域锁定住，这表示该区域不会被置换（swap）。<br>在调用mmap()时必须要指定MAP_SHARED 或MAP_PRIVATE。参数fd为open()返回的文件描述词，代表欲映射到内存的文件。参数offset为文件映射的偏移量，通常设置为0，代表从文件最前方开始对应，offset必须是分页大小的整数倍。<br>返回值  若映射成功则返回映射区的内存起始地址，否则返回MAP_FAILED(－1)，错误原因存于errno 中。<br>错误代码  EBADF 参数fd 不是有效的文件描述词<br>EACCES 存取权限有误。如果是MAP_PRIVATE 情况下文件必须可读，使用MAP_SHARED则要有PROT_WRITE以及该文件要能写入。<br>EINVAL 参数start、length 或offset有一个不合法。<br>EAGAIN 文件被锁住，或是有太多内存被锁住。<br>ENOMEM 内存不足。</p>
+<h3 id="munmap（解除内存映射）"><a href="#munmap（解除内存映射）" class="headerlink" title="munmap（解除内存映射）"></a>munmap（解除内存映射）</h3><p>表头文件 <br> </p>
+<pre><code>#include(unistd.h)
+#include(sys/mman.h)
+</code></pre><p>定义函数  int munmap(void *start,size_t length);<br>函数说明  munmap()用来取消参数start所指的映射内存起始地址，参数length则是欲取消的内存大小。当进程结束或利用exec相关函数来执行其他程序时，映射内存会自动解除，但关闭对应的文件描述词时不会解除映射。<br>返回值  如果解除映射成功则返回0，否则返回－1，错误原因存于errno中错误代码EINVAL<br>参数  start或length 不合法。</p>
+<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a>动态内存分配</h2><h3 id="malloc（配置内存空间）"><a href="#malloc（配置内存空间）" class="headerlink" title="malloc（配置内存空间）"></a>malloc（配置内存空间）</h3><p>表头文件<br>    </p>
+<pre><code>#include(stdlib.h)
+</code></pre><p>定义函数  void * malloc(size_t size);<br>函数说明  malloc()用来配置内存空间，其大小由指定的size决定。<br>返回值  若配置成功则返回一指针，失败则返回NULL。</p>
+<h3 id="free（释放原先配置的内存）"><a href="#free（释放原先配置的内存）" class="headerlink" title="free（释放原先配置的内存）"></a>free（释放原先配置的内存）</h3><p>表头文件<br></p>
+<pre><code>#include(stdlib.h)
+</code></pre><p>定义函数  void free(void *ptr);<br>函数说明  参数ptr为指向先前由malloc()、calloc()或realloc()所返回的内存指针。调用free()后ptr所指的内存空间便会被收回。假若参数ptr所指的内存空间已被收回或是未知的内存地址，则调用free()可能会有无法预期的情况发生。若参数ptr为NULL，则free()不会有任何作用。</p>
+<h3 id="calloc（配置内存空间）"><a href="#calloc（配置内存空间）" class="headerlink" title="calloc（配置内存空间）"></a>calloc（配置内存空间）</h3><p>表头文件<br></p>
+<pre><code>#include (stdlib.h)
+</code></pre><p>定义函数  void <em>calloc(size_t nmemb，size_t size);<br>函数说明  calloc()用来配置nmemb个相邻的内存单位，每一单位的大小为size，并返回指向第一个元素的指针。这和使用下列的方式效果相同:malloc(nmemb</em>size);不过，在利用calloc()配置内存时会将内存内容初始化为0。<br>返回值  若配置成功则返回一指针，失败则返回NULL。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>getpagesize（取得内存分页大小）<br>表头文件<br></p>
+<pre><code>#include(unistd.h)
+</code></pre><p>定义函数  size_t getpagesize(void);<br>函数说明  返回一分页的大小，单位为字节（byte）。此为系统的分页大小，不一定会和硬件分页大小相同。<br>返回值  内存分页大小。附加说明在Intel x86 上其返回值应为4096bytes。</p>
+<h2 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求:"></a>实验要求:</h2><h3 id="分别使用命令和-proc文件系统列出系统当前内存的使用情况。"><a href="#分别使用命令和-proc文件系统列出系统当前内存的使用情况。" class="headerlink" title="分别使用命令和/proc文件系统列出系统当前内存的使用情况。"></a>分别使用命令和/proc文件系统列出系统当前内存的使用情况。</h3><p><img src="/img/图111.png" alt="&quot;图1&quot;"><br><img src="/img/图222.png" alt="&quot;图2&quot;"></p>
+<h3 id="启动几个耗时较长的后台进程（多个grep），分别使用free和vmstat连续实时观察内存的使用情况。"><a href="#启动几个耗时较长的后台进程（多个grep），分别使用free和vmstat连续实时观察内存的使用情况。" class="headerlink" title="启动几个耗时较长的后台进程（多个grep），分别使用free和vmstat连续实时观察内存的使用情况。"></a>启动几个耗时较长的后台进程（多个grep），分别使用free和vmstat连续实时观察内存的使用情况。</h3><p>通过后台运行多个”grep -r -i ‘a’ /“ 进程，观察内存的使用情况<br><img src="/img/图333.png" alt="&quot;图3&quot;"><br><img src="/img/图4.png" alt="&quot;图4&quot;"><br><img src="/img/图5.png" alt="&quot;图5&quot;"></p>
+<h3 id="用size工具观察三个不同的可执行文件的大小以及它们段的大小。"><a href="#用size工具观察三个不同的可执行文件的大小以及它们段的大小。" class="headerlink" title="用size工具观察三个不同的可执行文件的大小以及它们段的大小。"></a>用size工具观察三个不同的可执行文件的大小以及它们段的大小。</h3><p><img src="/img/图6.png" alt="&quot;图6&quot;"></p>
+<h3 id="启动一个耗时较长的后台进程，通过-proc文件系统查看该进程所有内存使用相关信息，并列出。"><a href="#启动一个耗时较长的后台进程，通过-proc文件系统查看该进程所有内存使用相关信息，并列出。" class="headerlink" title="启动一个耗时较长的后台进程，通过/proc文件系统查看该进程所有内存使用相关信息，并列出。"></a>启动一个耗时较长的后台进程，通过/proc文件系统查看该进程所有内存使用相关信息，并列出。</h3><p>后台运行程序是：vmstat 3。通过ps af 命令查看此后台进程pid。再在/proc/$PID中查看此进程所有内存使用的相关信息。<br><img src="/img/图7.png" alt="&quot;图7&quot;"></p>
+<h3 id="编写一个程序，打印系统的页面大小。"><a href="#编写一个程序，打印系统的页面大小。" class="headerlink" title="编写一个程序，打印系统的页面大小。"></a>编写一个程序，打印系统的页面大小。</h3><p><img src="/img/图8.png" alt="&quot;图8&quot;"></p>
+<h3 id="阅读并编译运行以下程序，总结内存映象文件的使用方法。"><a href="#阅读并编译运行以下程序，总结内存映象文件的使用方法。" class="headerlink" title="阅读并编译运行以下程序，总结内存映象文件的使用方法。"></a>阅读并编译运行以下程序，总结内存映象文件的使用方法。</h3><p>利用mmap()来读取/etc/passwd 文件内容<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/mman.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> fd;</div><div class="line">		<span class="keyword">void</span> *start;</div><div class="line">		<span class="keyword">struct</span> stat sb;</div><div class="line">		fd=open(<span class="string">"/etc/passwd"</span>,O_RDONLY);</div><div class="line">		fstat(fd,&amp;sb);</div><div class="line">		start=mmap(<span class="literal">NULL</span>,sb.st_size,PROT_READ,MAP_PRIVATE,fd,<span class="number">0</span>);</div><div class="line">		<span class="keyword">if</span>(start= = MAP_FAILED)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s"</span>,start);</div><div class="line">		munmap(start,sb.st_size);</div><div class="line">		closed(fd);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/img/图10.png" alt="&quot;图10&quot;"></p>
+<h3 id="编写一个程序，利用内存映象文件，实现less工具的功能。"><a href="#编写一个程序，利用内存映象文件，实现less工具的功能。" class="headerlink" title="编写一个程序，利用内存映象文件，实现less工具的功能。"></a>编写一个程序，利用内存映象文件，实现less工具的功能。</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/mman.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;memory.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;termios.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span>  <span class="title">lastrow</span><span class="params">(<span class="keyword">char</span> * s,<span class="keyword">int</span> d)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span>  <span class="title">nextrow</span><span class="params">(<span class="keyword">char</span> * s,<span class="keyword">int</span> d)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span>  <span class="title">onepage</span><span class="params">(<span class="keyword">char</span> * s,<span class="keyword">int</span> d)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">  FILE *input;</div><div class="line">  <span class="keyword">struct</span> termios initial_settings, new_settings;</div><div class="line">  <span class="keyword">int</span> inputString;</div><div class="line"></div><div class="line">  input = fopen(<span class="string">"/dev/tty"</span>, <span class="string">"r"</span>);   <span class="comment">//定位到终端输入</span></div><div class="line">  <span class="keyword">if</span>(!input)</div><div class="line">  &#123;</div><div class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Unable to open /dev/tty\n"</span>);</div><div class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  tcgetattr(fileno(input), &amp;initial_settings);</div><div class="line">  new_settings = initial_settings;</div><div class="line">  new_settings.c_lflag &amp;= ~ICANON;</div><div class="line">  new_settings.c_lflag &amp;= ~ECHO;</div><div class="line">  new_settings.c_cc[VMIN] = <span class="number">1</span>;</div><div class="line">  new_settings.c_cc[VTIME] = <span class="number">0</span>;</div><div class="line">  new_settings.c_lflag &amp;= ~ISIG;</div><div class="line"></div><div class="line">  <span class="keyword">if</span>(tcsetattr(fileno(input), TCSANOW, &amp;new_settings) != <span class="number">0</span>)</div><div class="line">  &#123;</div><div class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Could not set attributes\n"</span>);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">int</span> fd,play=<span class="number">0</span>;</div><div class="line">  <span class="keyword">char</span> lab;</div><div class="line">  <span class="keyword">char</span> *start;</div><div class="line">  <span class="keyword">struct</span> stat sb;</div><div class="line">  fd=open(<span class="string">"test.txt"</span>,O_RDONLY); <span class="comment">/*打开*/</span></div><div class="line">  fstat(fd,&amp;sb); 	<span class="comment">/*获取文件大小*/</span></div><div class="line">  start=mmap(<span class="literal">NULL</span>,sb.st_size,PROT_READ,MAP_PRIVATE,fd,<span class="number">0</span>);</div><div class="line">  <span class="keyword">if</span>(start==MAP_FAILED) <span class="comment">/*判断是否映射成功*/</span></div><div class="line">  <span class="keyword">return</span>(<span class="number">1</span>);</div><div class="line">  play=onepage(start,play)+<span class="number">1</span>;</div><div class="line">  lab=fgetc(input);</div><div class="line">    <span class="keyword">while</span>(lab!= <span class="string">'q'</span>&amp;&amp; lab!=<span class="string">'Q'</span>)</div><div class="line">    &#123;</div><div class="line">      <span class="keyword">if</span>(play&lt;<span class="number">40</span>||play&gt;sb.st_size)</div><div class="line">      &#123;</div><div class="line">          lab = fgetc(input);</div><div class="line">          <span class="keyword">break</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(lab==<span class="string">' '</span>)</div><div class="line">          play=play+<span class="number">1</span>+onepage(start,play);</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(lab==<span class="string">'D'</span>||lab==<span class="string">'d'</span>)</div><div class="line">          play=play+<span class="number">1</span>+nextrow(start,play);</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(lab==<span class="string">'U'</span>||lab==<span class="string">'u'</span>)</div><div class="line">          play=<span class="number">1</span>+lastrow(start,play);</div><div class="line">          </div><div class="line">      lab = fgetc(input);</div><div class="line">    &#125;</div><div class="line">    tcsetattr(fileno(input), TCSANOW, &amp;initial_settings);</div><div class="line"></div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line"></div><div class="line">    munmap(start,sb.st_size); <span class="comment">/*解除映射*/</span></div><div class="line">    close(fd);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">onepage</span><span class="params">(<span class="keyword">char</span> * s,<span class="keyword">int</span> d)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="keyword">int</span> i,count=<span class="number">0</span>;</div><div class="line">     <span class="keyword">char</span> * buffer=<span class="built_in">malloc</span>(<span class="number">2048</span>);<span class="comment">//配置内存空间，由buffer指向该空间</span></div><div class="line">     s+=d;</div><div class="line">   <span class="comment">/*每10行作为一页输出*/</span></div><div class="line">     <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">2048</span>;i++)</div><div class="line">     &#123;</div><div class="line">         <span class="keyword">if</span>(s[i]==<span class="string">'\n'</span>)</div><div class="line">             count++;</div><div class="line">         <span class="keyword">if</span>(count==<span class="number">10</span>)</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="built_in">memcpy</span>(buffer,s,i);</div><div class="line">     buffer[i]=<span class="string">'\0'</span>;</div><div class="line">     <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,buffer);</div><div class="line">     <span class="keyword">return</span> i;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span>  <span class="title">nextrow</span><span class="params">(<span class="keyword">char</span> * s,<span class="keyword">int</span> d)</span>	<span class="comment">//输出下一行</span></span></div><div class="line">&#123;</div><div class="line">     <span class="keyword">int</span> i;</div><div class="line">     <span class="keyword">char</span> * buffer=<span class="built_in">malloc</span>(<span class="number">100</span>);</div><div class="line">     s+=d;</div><div class="line">     <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</div><div class="line">        <span class="keyword">if</span>(s[i]==<span class="string">'\n'</span>)</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     <span class="built_in">memcpy</span>(buffer,s,i);</div><div class="line">     buffer[i]=<span class="string">'\0'</span>;</div><div class="line">     <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,buffer);</div><div class="line">     <span class="keyword">return</span> i;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span>  <span class="title">lastrow</span><span class="params">(<span class="keyword">char</span> * s,<span class="keyword">int</span> d)</span>	<span class="comment">//输出上一行</span></span></div><div class="line">&#123;</div><div class="line">     <span class="keyword">int</span> i,count=<span class="number">0</span>;</div><div class="line">     <span class="keyword">char</span> * buffer=<span class="built_in">malloc</span>(<span class="number">100</span>);</div><div class="line">     <span class="keyword">int</span> py=d;</div><div class="line">     <span class="keyword">for</span>(;d&gt;<span class="number">0</span>;d--)</div><div class="line">     &#123;</div><div class="line">        <span class="keyword">if</span>(s[d]==<span class="string">'\n'</span>)</div><div class="line">           count++;</div><div class="line">        <span class="keyword">if</span>(count==<span class="number">2</span>)</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="built_in">memcpy</span>(buffer,s+d+<span class="number">1</span>,py-d<span class="number">-2</span>);</div><div class="line">     buffer[py-d<span class="number">-2</span>]=<span class="string">'\0'</span>;</div><div class="line">     <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,buffer);</div><div class="line">     <span class="keyword">return</span> d;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/img/图11.png" alt="&quot;图11&quot;"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/09/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/04/数据库导出表结构及数据/" rel="prev" title="数据库导出表结构及数据">
+                数据库导出表结构及数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jerriychen" />
+          <p class="site-author-name" itemprop="name">Jerriychen</p>
+          <p class="site-description motion-element" itemprop="description">Stay hungry Stay foolish</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Jerriychen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/JerryChenzzh01" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5300525490/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验目的："><span class="nav-number">1.</span> <span class="nav-text">实验目的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储相关的命令"><span class="nav-number">2.</span> <span class="nav-text">存储相关的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proc文件系统（使用手册页man-5-proc）"><span class="nav-number">3.</span> <span class="nav-text">/proc文件系统（使用手册页man 5 proc）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存映像文件"><span class="nav-number">4.</span> <span class="nav-text">内存映像文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mmap（建立内存映射）"><span class="nav-number">4.1.</span> <span class="nav-text">mmap（建立内存映射）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#munmap（解除内存映射）"><span class="nav-number">4.2.</span> <span class="nav-text">munmap（解除内存映射）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态内存分配"><span class="nav-number">5.</span> <span class="nav-text">动态内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc（配置内存空间）"><span class="nav-number">5.1.</span> <span class="nav-text">malloc（配置内存空间）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#free（释放原先配置的内存）"><span class="nav-number">5.2.</span> <span class="nav-text">free（释放原先配置的内存）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#calloc（配置内存空间）"><span class="nav-number">5.3.</span> <span class="nav-text">calloc（配置内存空间）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验要求"><span class="nav-number">7.</span> <span class="nav-text">实验要求:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分别使用命令和-proc文件系统列出系统当前内存的使用情况。"><span class="nav-number">7.1.</span> <span class="nav-text">分别使用命令和/proc文件系统列出系统当前内存的使用情况。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动几个耗时较长的后台进程（多个grep），分别使用free和vmstat连续实时观察内存的使用情况。"><span class="nav-number">7.2.</span> <span class="nav-text">启动几个耗时较长的后台进程（多个grep），分别使用free和vmstat连续实时观察内存的使用情况。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用size工具观察三个不同的可执行文件的大小以及它们段的大小。"><span class="nav-number">7.3.</span> <span class="nav-text">用size工具观察三个不同的可执行文件的大小以及它们段的大小。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动一个耗时较长的后台进程，通过-proc文件系统查看该进程所有内存使用相关信息，并列出。"><span class="nav-number">7.4.</span> <span class="nav-text">启动一个耗时较长的后台进程，通过/proc文件系统查看该进程所有内存使用相关信息，并列出。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写一个程序，打印系统的页面大小。"><span class="nav-number">7.5.</span> <span class="nav-text">编写一个程序，打印系统的页面大小。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读并编译运行以下程序，总结内存映象文件的使用方法。"><span class="nav-number">7.6.</span> <span class="nav-text">阅读并编译运行以下程序，总结内存映象文件的使用方法。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写一个程序，利用内存映象文件，实现less工具的功能。"><span class="nav-number">7.7.</span> <span class="nav-text">编写一个程序，利用内存映象文件，实现less工具的功能。</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jerriychen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

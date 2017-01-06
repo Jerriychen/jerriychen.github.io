@@ -108,7 +108,7 @@
 <meta name="description" content="Stay hungry Stay foolish">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Xperia">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="Xperia">
 <meta property="og:description" content="Stay hungry Stay foolish">
 <meta name="twitter:card" content="summary">
@@ -282,8 +282,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/04/数据库导出表结构及数据/" itemprop="url">
-                  数据库导出表结构及数据
+                <a class="post-title-link" href="/2016/10/13/我的生活/" itemprop="url">
+                  我的生活
                 </a>
               
             
@@ -296,8 +296,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-04T22:33:24+08:00" content="2016-12-04">
-              2016-12-04
+            <time itemprop="dateCreated" datetime="2016-10-13T18:03:34+08:00" content="2016-10-13">
+              2016-10-13
             </time>
           </span>
 
@@ -310,8 +310,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/我的生活/" itemprop="url" rel="index">
+                    <span itemprop="name">我的生活</span>
                   </a>
                 </span>
 
@@ -345,12 +345,7 @@
       
         
           
-            <h2 id="Mysql导出表结构及表数据"><a href="#Mysql导出表结构及表数据" class="headerlink" title="Mysql导出表结构及表数据"></a>Mysql导出表结构及表数据</h2><p>命令行下具体用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -u用户名 -p密码 -d 数据库名 表名 脚本名;</div></pre></td></tr></table></figure></p>
-<p>1、导出数据库名为dbname的表结构(假设其中用户名为root,密码为123456,生成的脚本名为db.sql)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -uroot -p123456 -d dbname &gt; db.sql;</div></pre></td></tr></table></figure></p>
-<p>-p 后面的密码可以暂时省略，可在回车以后输入。</p>
-<p>2、导出数据库dbname某张表(test)结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -uroot -p123456 -d dbname test &gt; db.sql;</div></pre></td></tr></table></figure></p>
-<p>3、导出数据库为dbname所有表结构及表数据（不加-d）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -uroot -p123456  dbname &gt; db.sql;</div></pre></td></tr></table></figure></p>
-<p>4、导出数据库为dbname某张表(test)结构及表数据（不加-d）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -uroot -p123456 dbname test &gt; db.sql;</div></pre></td></tr></table></figure></p>
+            <p>我的生活</p>
 
           
         
@@ -400,8 +395,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/15/操作系统-存储管理/" itemprop="url">
-                  操作系统-存储管理
+                <a class="post-title-link" href="/2016/10/13/Operating/" itemprop="url">
+                  Operating
                 </a>
               
             
@@ -414,8 +409,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-15T22:26:39+08:00" content="2016-11-15">
-              2016-11-15
+            <time itemprop="dateCreated" datetime="2016-10-13T17:22:45+08:00" content="2016-10-13">
+              2016-10-13
             </time>
           </span>
 
@@ -428,8 +423,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -462,113 +457,8 @@
 
       
         
-          <h2 id="实验目的："><a href="#实验目的：" class="headerlink" title="实验目的："></a>实验目的：</h2><p> 观察系统存储器使用情况<br> 观察进程使用存储器的情况<br> 掌握通过内存映像文件提高性能的方法<br> 掌握动态内存分配技术</p>
-<h2 id="存储相关的命令"><a href="#存储相关的命令" class="headerlink" title="存储相关的命令"></a>存储相关的命令</h2><p>free 显示系统使用和未被使用的内存数量（可以实时执行）<br>输出包含的标题有 3 行信息：<br>Mem。此行包含了有关物理内存的信息。包括以下详细内容：<br>total。该项显示可用的物理内存总量，单位为 KB。该数字小于安装的物理内存的容量，是因为内核本身也要使用一小部分的内存。<br>used。该项显示了用于应用程序超速缓存数据的内存容量。<br>free。该项显示了此时未使用且有效的内存容量。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/15/操作系统-存储管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/09/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-09T21:19:30+08:00" content="2016-11-09">
-              2016-11-09
-            </time>
-          </span>
-
           
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <p>操作系统进程管理。</p>
 
           
         
@@ -618,8 +508,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/08/操作系统实验-管道/" itemprop="url">
-                  操作系统实验-管道
+                <a class="post-title-link" href="/2016/10/12/My-new-article/" itemprop="url">
+                  Java Programing
                 </a>
               
             
@@ -632,123 +522,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-08T22:05:38+08:00" content="2016-11-08">
-              2016-11-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>管道有两种类型：无名管道和有名管道。无名管道没有名字，也从来不在文件系统中出现，只是和内存中的一个索引节点相关联的两个文件描述符，该索引节点指向指向内存中的一个物理块。写进程向管道写入数据时，字节被复制到共享数据页面中，读进程从管道读出数据时，字节从共享页面中读出。无名管道是半双工的，数据只能在一个方向传送，而且只能在相关的、有共同祖先的的进程之间使用。<br>有（命）名管道（FIFO）可以为两个不相关的进程提供通信。它不是临时对象，是文件系统中的一个实体，可以用mknod和mkfifo创建。在写进程使用之前，必须让读进程先打开管道，任何读进程从中读取之前必须有写进程向其写入数据。FIFO有一个路径与之关联，故无亲缘关系的进程可以访问同一个FIFO。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/08/操作系统实验-管道/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/27/华为面试题－关灯/" itemprop="url">
-                  华为面试题－关灯
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-27T20:11:14+08:00" content="2016-10-27">
-              2016-10-27
+            <time itemprop="dateCreated" datetime="2016-10-12T22:04:51+08:00" content="2016-10-12">
+              2016-10-12
             </time>
           </span>
 
@@ -795,124 +570,9 @@
 
       
         
-          <p>问题描述：<br>  一条长廊里依次装有n(1 ≤ n ≤ 65535)盏电灯，从头到尾编号1~n。<br>  每盏电灯由一个拉线开关控制。开始，电灯全部关着。<br>  有n个学生从长廊穿过。第一个学生把号码凡是1的倍数的电灯的开关拉一下；<br>  接着第二个学生把号码凡是2的倍数的电灯的开关拉一下；<br>  接着第三个学生把号码凡是3的倍数的电灯的开关拉一下；<br>  如此继续下去，最后第n个学生把号码凡是n的倍数的电灯的开关拉一下。<br>  n个学生按此规定走完后，长廊里电灯有几盏亮着。注：电灯数和学生数一致。<br>
+          <h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/27/华为面试题－关灯/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/25/接雨水/" itemprop="url">
-                  接雨水
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-25T17:51:49+08:00" content="2016-10-25">
-              2016-10-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a>接雨水</h2><p>问题描述：<br><img src="/img/接雨水.png" alt="&quot;接雨水&quot;"><br>如上图所示，海拔分别为 [0,1,0,2,1,0,1,3,2,1,2,1], 返回 6。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/25/接雨水/#more" rel="contents">
+            <a class="btn" href="/2016/10/12/My-new-article/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -946,7 +606,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 
